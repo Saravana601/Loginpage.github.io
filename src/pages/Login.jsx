@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -8,6 +8,27 @@ function Login() {
   };
   const [formData, setFormData] = useState(initialState);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Inject Transifex Live settings and script into the document
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.innerHTML = `
+      window.liveSettings = { api_key: "fa8519822dee435bbb48a5d0bd75760a" };
+    `;
+    document.head.appendChild(script);
+
+    const transifexScript = document.createElement("script");
+    transifexScript.type = "text/javascript";
+    transifexScript.src = "//cdn.transifex.com/live.js";
+    document.head.appendChild(transifexScript);
+
+    // Cleanup function
+    return () => {
+      document.head.removeChild(script);
+      document.head.removeChild(transifexScript);
+    };
+  }, []);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;

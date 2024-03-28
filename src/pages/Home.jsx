@@ -1,7 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 function Navigation() {
+  useEffect(() => {
+    // Inject Transifex Live settings and script into the document
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.innerHTML = `
+      window.liveSettings = { api_key: "fa8519822dee435bbb48a5d0bd75760a" };
+    `;
+    document.head.appendChild(script);
+
+    const transifexScript = document.createElement("script");
+    transifexScript.type = "text/javascript";
+    transifexScript.src = "//cdn.transifex.com/live.js";
+    document.head.appendChild(transifexScript);
+
+    // Cleanup function
+    return () => {
+      document.head.removeChild(script);
+      document.head.removeChild(transifexScript);
+    };
+  }, []);
+
   return (
     <div>
       <div>
