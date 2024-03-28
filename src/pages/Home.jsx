@@ -7,7 +7,7 @@ function Navigation() {
     const script = document.createElement("script");
     script.type = "text/javascript";
     script.innerHTML = `
-      window.liveSettings = { api_key: "fa8519822dee435bbb48a5d0bd75760a" };
+      window.liveSettings = { api_key: "ffaabdfdabe64e23885b5c842c1411fb" };
     `;
     document.head.appendChild(script);
 
